@@ -1,9 +1,9 @@
 public class Main {
     public static void main(String[] args) {
-        Electrodomesticos test=new Electrodomesticos();
-        test.mostrarElectrodomestico();
-        //Electrodomesticos test2=new Electrodomesticos(0,"blanco","a",18);
-        //test2.mostrarElectrodomestico();
+        Electrodomestico test=new Electrodomestico();
+        test.mostrarElectrodomesticos();
+        Electrodomestico test2=new Electrodomestico(0,"azul","E",19);
+        test2.mostrarElectrodomesticos();
     }
     
 }

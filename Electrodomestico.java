@@ -1,53 +1,38 @@
-import javax.swing.*;
+import javax.swing.JOptionPane;
 
-public class Electrodomesticos {
+/**
+ * Electrodomestico
+ */
+public class Electrodomestico {
 
     private double precioBase;
     private String color;
     private String consumoEnergetico;
     private double peso;
-
-    public double getPrecioBase() {
-        return precioBase;
-    }
-    public String getColor() {
-        return color;
-    }
-    public String getConsumoEnergetico() {
-        return consumoEnergetico;
-    }
-    public double getPeso() {
-        return peso;
-    }
-    public Electrodomesticos() {
+    private String col="";
+    
+    public Electrodomestico() {
         color=JOptionPane.showInputDialog("Ingrese el color del electrodomestico").toUpperCase();
         consumoEnergetico=(JOptionPane.showInputDialog("Ingrese la letra del consumo dele electrodomestico")).toUpperCase();
         peso=Double.parseDouble(JOptionPane.showInputDialog("Ingrese el peso del electrodomestico"));
     }
-    
-    public Electrodomesticos(double precioBase, double peso) {
+    public Electrodomestico(double precioBase, double peso) {
         this.color = "blanco";
 		this.consumoEnergetico = "F";
 		this.peso = peso;
 		this.precioBase = precioBase;
     }
-    public Electrodomesticos(double precioBase, String color, String consumoEnergetico, double peso) {
+ 
+    public Electrodomestico(double precioBase, String color, String consumoEnergetico, double peso) {
         this.precioBase = precioBase;
         this.color=color;
         this.consumoEnergetico = consumoEnergetico;
         this.peso = peso;
     }
-    /*public Electrodomesticos( String color, String consumoEnergetico, double peso) {
-        this.precioBase=precioBase;
-        comprobarColor(this.color);
-        this.consumoEnergetico = consumoEnergetico;
-        this.peso = peso;
-    }*/
-
     public void comprobarConsumoEnergetico(String letra)
     {
         boolean ban=false;
-        switch (letra) {
+        switch (letra.toUpperCase()) {
             case "A":
                 ban=true;
                 precioBase=100;
@@ -78,16 +63,21 @@ public class Electrodomesticos {
                 break;
         }
     }
-    public void comprobarColor(String color)
+    public String comprobarColor(String color)
     {
-        if(color == "NEGRO" || color == "AZUL" || color == "GRIS" || color == "ROJO"){
-            this.color=color;
+        String vec []={"BLANCO","NEGRO","ROJO","AZUL"};
+        for(int i=0;i<vec.length;i++)
+        {
+            if(color.equalsIgnoreCase(vec[i]))
+            {
+                return color;
+            }
+            
         }
-        else{
-            this.color="BLANCO";
-        }
+        color="BLANCO";
+        return color;
     }
-    private double calcularPrecio()
+    public double precioFinal()
     {
         double pesoPorPrecio=0;
         comprobarConsumoEnergetico(consumoEnergetico);
@@ -100,18 +90,30 @@ public class Electrodomesticos {
 		}	else {
 			pesoPorPrecio = 100;
 		}
-		
-		
 		this.precioBase += pesoPorPrecio;
-		
-		return this.precioBase;
+        return this.precioBase;
+
     }
-    public double precioFinal() {
-		return calcularPrecio();
-	}
-    public void mostrarElectrodomestico()
+    public void mostrarElectrodomesticos()
     {
-        JOptionPane.showMessageDialog(null,"Datos"+"\n"+precioFinal()+"\n"+color+"\n"+consumoEnergetico+"\n"+peso);
+        col=comprobarColor(color);
+        JOptionPane.showMessageDialog(null,"Datos"+"\n"+precioFinal()+"\n"+col+"\n"+consumoEnergetico+"\n"+peso);
     }
+
+
+
+    public double getPrecioBase() {
+        return precioBase;
+    }
+    public String getColor() {
+        return color;
+    }
+    public String getConsumoEnergetico() {
+        return consumoEnergetico;
+    }
+    public double getPeso() {
+        return peso;
+    }
+
 
 }
